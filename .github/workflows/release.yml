@@ -81,4 +81,5 @@ jobs:
           releaseBody: 'Personal rebrand build of CodexMonitor. Unsigned binaries — see README for first-launch notes on macOS/Windows.'
           releaseDraft: true
           prerelease: false
+          includeUpdaterJson: false
           args: ${{ matrix.args }}
