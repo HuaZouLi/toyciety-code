@@ -17,8 +17,8 @@ vi.mock("@services/toasts", () => ({
 
 const workspace: WorkspaceInfo = {
   id: "ws-1",
-  name: "CodexMonitor",
-  path: "/tmp/codex-monitor",
+  name: "ToycietyCode",
+  path: "/tmp/toyciety-code",
   connected: true,
   settings: { sidebarCollapsed: false },
 };

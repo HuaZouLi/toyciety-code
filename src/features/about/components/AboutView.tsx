@@ -5,7 +5,7 @@ import type { AppLanguagePreference } from "@/types";
 import { getAppSettings } from "@services/tauri";
 import { I18nProvider, useI18n } from "@/i18n";
 
-const GITHUB_URL = "https://github.com/Dimillian/CodexMonitor";
+const GITHUB_URL = "https://github.com/Dimillian/ToycietyCode";
 const TWITTER_URL = "https://x.com/dimillian";
 
 export function AboutView() {
@@ -72,9 +72,9 @@ function AboutViewContent() {
           <img
             className="about-icon"
             src="/app-icon.png"
-            alt={tx("Codex Monitor icon")}
+            alt={tx("Toyciety Code icon")}
           />
-          <div className="about-title">{tx("Codex Monitor")}</div>
+          <div className="about-title">{tx("Toyciety Code")}</div>
         </div>
         <div className="about-version">
           {version ? tx("Version {version}", { version }) : tx("Version —")}

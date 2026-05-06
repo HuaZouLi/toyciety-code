@@ -27,8 +27,8 @@ vi.mock("../../git/hooks/useGitCommitDiffs", () => ({
 
 const workspace: WorkspaceInfo = {
   id: "workspace-1",
-  name: "CodexMonitor",
-  path: "/tmp/codex-monitor",
+  name: "ToycietyCode",
+  path: "/tmp/toyciety-code",
   connected: true,
   settings: { sidebarCollapsed: false },
 };

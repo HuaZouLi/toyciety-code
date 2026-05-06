@@ -1,12 +1,12 @@
-# CodexMonitor
+# ToycietyCode
 
 语言：[English](README.md) | 简体中文
 
-[![gitcgr](https://gitcgr.com/badge/Dimillian/CodexMonitor.svg)](https://gitcgr.com/Dimillian/CodexMonitor)
+[![gitcgr](https://gitcgr.com/badge/Dimillian/ToycietyCode.svg)](https://gitcgr.com/Dimillian/ToycietyCode)
 
-![CodexMonitor](screenshot.png)
+![ToycietyCode](screenshot.png)
 
-CodexMonitor 是一个 Tauri 应用，用于在本地工作区之间编排多个 Codex 智能体。它提供项目侧边栏、用于快速操作的首页，以及基于 Codex app-server 协议的会话视图。
+ToycietyCode 是一个 Tauri 应用，用于在本地工作区之间编排多个 Codex 智能体。它提供项目侧边栏、用于快速操作的首页，以及基于 Codex app-server 协议的会话视图。
 
 ## 功能
 
@@ -92,11 +92,11 @@ iOS 支持目前仍在进行中。
 权威 runbook：`docs/mobile-ios-tailscale-blueprint.md`。
 
 1. 在桌面端和 iPhone 上安装并登录 Tailscale（同一个 tailnet）。
-2. 在桌面端 CodexMonitor 中打开 `Settings > Server`。
+2. 在桌面端 ToycietyCode 中打开 `Settings > Server`。
 3. 设置 `Remote backend token`。
 4. 在 `Mobile access daemon` 中点击 `Start daemon` 启动桌面端 daemon。
 5. 在 `Tailscale helper` 中使用 `Detect Tailscale`，并记录建议主机（例如 `your-mac.your-tailnet.ts.net:4732`）。
-6. 在 iOS CodexMonitor 中打开 `Settings > Server`。
+6. 在 iOS ToycietyCode 中打开 `Settings > Server`。
 7. 输入桌面端 Tailscale 主机和相同 token。
 8. 点击 `Connect & test` 并确认测试成功。
 
@@ -113,23 +113,23 @@ iOS 支持目前仍在进行中。
 
 ```bash
 cd src-tauri
-cargo build --bin codex_monitor_daemon --bin codex_monitor_daemonctl
+cargo build --bin toyciety_code_daemon --bin toyciety_code_daemonctl
 ```
 
 示例：
 
 ```bash
 # 显示当前 daemon 状态
-./target/debug/codex_monitor_daemonctl status
+./target/debug/toyciety_code_daemonctl status
 
 # 使用 settings.json 中的 host/token 启动 daemon
-./target/debug/codex_monitor_daemonctl start
+./target/debug/toyciety_code_daemonctl start
 
 # 停止 daemon
-./target/debug/codex_monitor_daemonctl stop
+./target/debug/toyciety_code_daemonctl stop
 
 # 打印等价的 daemon 启动命令
-./target/debug/codex_monitor_daemonctl command-preview
+./target/debug/toyciety_code_daemonctl command-preview
 ```
 
 常用覆盖参数：
@@ -137,7 +137,7 @@ cargo build --bin codex_monitor_daemon --bin codex_monitor_daemonctl
 - `--data-dir <path>`：包含 `settings.json` / `workspaces.json` 的应用数据目录
 - `--listen <addr>`：覆盖监听地址
 - `--token <token>`：覆盖 token
-- `--daemon-path <path>`：显式指定 `codex-monitor-daemon` 二进制路径
+- `--daemon-path <path>`：显式指定 `toyciety-code-daemon` 二进制路径
 - `--json`：输出机器可读格式
 
 ### iOS 前置条件
@@ -279,8 +279,8 @@ src/
   types.ts          共享类型
 src-tauri/
   src/lib.rs        Tauri 应用后端命令注册
-  src/bin/codex_monitor_daemon.rs  远程 daemon JSON-RPC 进程
-  src/bin/codex_monitor_daemon/rpc/  daemon RPC 领域 handlers
+  src/bin/toyciety_code_daemon.rs  远程 daemon JSON-RPC 进程
+  src/bin/toyciety_code_daemon/rpc/  daemon RPC 领域 handlers
   src/shared/       app + daemon 共用的后端核心
   src/shared/git_ui_core/      git/github 共享核心模块
   src/shared/workspaces_core/  workspace/worktree 共享核心模块
@@ -300,9 +300,9 @@ src-tauri/
 - 选择线程时始终调用 `thread/resume` 从磁盘刷新消息。
 - CLI 会话在其 `cwd` 匹配工作区路径时出现；除非恢复，否则不会实时流式输出。
 - 应用通过 stdio 使用 `codex app-server`；参见 `src-tauri/src/lib.rs` 和 `src-tauri/src/codex/`。
-- 远程 daemon 入口是 `src-tauri/src/bin/codex_monitor_daemon.rs`；RPC 路由位于 `src-tauri/src/bin/codex_monitor_daemon/rpc.rs`，领域 handlers 位于 `src-tauri/src/bin/codex_monitor_daemon/rpc/`。
+- 远程 daemon 入口是 `src-tauri/src/bin/toyciety_code_daemon.rs`；RPC 路由位于 `src-tauri/src/bin/toyciety_code_daemon/rpc.rs`，领域 handlers 位于 `src-tauri/src/bin/toyciety_code_daemon/rpc/`。
 - 共享领域逻辑位于 `src-tauri/src/shared/`（尤其是 `src-tauri/src/shared/git_ui_core/` 和 `src-tauri/src/shared/workspaces_core/`）。
-- Codex home 会按顺序从工作区设置、旧版 `.codexmonitor/`、`$CODEX_HOME`/`~/.codex` 解析。
+- Codex home 会按顺序从工作区设置、旧版 `.toycietycode/`、`$CODEX_HOME`/`~/.codex` 解析。
 - 工作树智能体位于应用数据目录（`worktrees/<workspace-id>`）；旧版 `.codex-worktrees/` 路径仍受支持，应用不再编辑仓库 `.gitignore`。
 - UI 状态（面板尺寸、降低透明度开关、最近线程活动）存储在 `localStorage`。
 - 自定义提示词从 `$CODEX_HOME/prompts`（或 `~/.codex/prompts`）加载，支持可选 frontmatter 描述/参数提示。

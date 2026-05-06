@@ -57,7 +57,7 @@ export function Home({
   return (
     <div className="home">
       <div className="home-hero">
-        <div className="home-title">{tx("Codex Monitor")}</div>
+        <div className="home-title">{tx("Toyciety Code")}</div>
         <div className="home-subtitle">
           {tx("Orchestrate agents across your local projects.")}
         </div>
